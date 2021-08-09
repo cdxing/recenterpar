@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<job maxFilesPerProcess="100" fileListSyntax="xrootd" >
+
+	<command>
+    starver SL19b
+		cons
+		root4star -q -l -b readPicoDst.C\(\"$FILELIST\",\"$JOBID\"\) &gt;&amp; ${JOBID}.log
+	tar -zcvf ${JOBID}.log.tgz ${JOBID}.log
+  </command>
+
+  <SandBox installer="ZIP">
+    <Package>
+      <File>file:./readPicoDst.C</File>
+      <File>file:./StRoot</File>
+    </Package>
+  </SandBox>
+
+   <input URL="filelist:/star/u/slan/pwg/fastoffline/7p7gev/list/7p7_fast_pico.list" />
+
+  <stdout discard="true" />
+  <stderr URL="file:./err/$JOBID.err"/>
+
+  <Generator>
+	  <Location>./report/</Location>
+	  <ScriptLocation>./csh/</ScriptLocation>
+	  <ListLocation>./list/</ListLocation>
+  </Generator>
+
+  <output fromScratch="*.root" toURL="file:/star/u/slan/pwg/fastoffline/7p7gev/recenterpar/production/" />
+  <output fromScratch="*.log.tgz" toURL="file:/star/u/slan/pwg/fastoffline/7p7gev/recenterpar/log/" />
+
+</job>
+
