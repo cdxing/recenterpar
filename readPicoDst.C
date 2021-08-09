@@ -12,7 +12,7 @@ void readPicoDst(const Char_t *inputFile="test.list", Char_t *outputFile="test")
 {
         Int_t nEvents = 1000000;
 //Load all the System libraries
-	
+
         gROOT->LoadMacro("$STAR/StRoot/StMuDSTMaker/COMMON/macros/loadSharedLibraries.C");
 	loadSharedLibraries();
 
@@ -20,10 +20,12 @@ void readPicoDst(const Char_t *inputFile="test.list", Char_t *outputFile="test")
     gSystem->Load("StPicoEvent");
 	gSystem->Load("StPicoDstMaker");
 	gSystem->Load("StRecenterPar");
+  gSystem->Load("StMyEpdAna");
 	chain = new StChain();
 
 	StPicoDstMaker *picoMaker = new StPicoDstMaker(2,inputFile,"picoDst");
 	StRecenterPar *recenter = new StRecenterPar("recenter",picoMaker,outputFile);
+  PicoAnalyzer *epdpar = new PicoAnalyzer();
 
 	chain->Init();
 	cout<<"chain->Init();"<<endl;
@@ -59,8 +61,8 @@ void readPicoDst(const Char_t *inputFile="test.list", Char_t *outputFile="test")
 	cout << "****************************************** " << endl;
 	cout << "total number of events  " << nEvents << endl;
 	cout << "****************************************** " << endl;
-	
+
 	delete chain;
-	
-	
+
+
 }
