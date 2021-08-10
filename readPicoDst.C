@@ -20,6 +20,7 @@ void readPicoDst(const Char_t *inputFile="test.list", Char_t *outputFile="test")
     gSystem->Load("StPicoEvent");
 	gSystem->Load("StPicoDstMaker");
 	gSystem->Load("StRecenterPar");
+	gSystem->Load("StEpdUtil");
   gSystem->Load("StMyEpdAna");
 	chain = new StChain();
 

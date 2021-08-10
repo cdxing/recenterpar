@@ -1,0 +1,44 @@
+This code is for offline analysis of STAR's picoDsts
+
+- There should be _no_ StObject-derived classes required.
+- Make a directory "Classes/" and put PicoAnalyser.h,.cxx
+  there.  Also in "Classes/" put the StEpdGeom and StBbcGeom
+  classes, which you can cvs check out from StRoot/StEpdUtil/
+  package.
+- Hopefully "make" will make your .so library, and the thing
+  will just work.  You might need to screw with the Makefile,
+  as is often the case.
+- You will need a DataFile.list, which is just a list of filenames
+  of the STAR picoDsts
+
+- The PicoAnalyzer.cxx is where you should put your analysis.
+  It is a lot like a STAR "Maker."  You can define some histograms
+  in the Init() method, and then do analysis and fill them in the
+  Make() method, and then write them out in the Finish() method.
+  This is just like a StMaker.
+
+Mike Lisa 23 April 2018
+lisa.1@osu.edu
+
+-----
+Some further notes
+
+Unfortunately, STAR continues to use absurdly obsolete StThreeVectorD
+class, so there is some unnatural stuff in the PicoAnalyzer class.
+Sorry, it's not my fault.  Not everybody appreciates the benefit of
+a "plain-root-based" way of analyzing STAR picoDsts, on a non-RCF computer.
+
+When you fire the thing up, you will see the following
+warnings.  This is to be expected and is not a problem.
+Warning in <TClass::Init>: no dictionary for class StPicoEvent is available
+Warning in <TClass::Init>: no dictionary for class StThreeVector<float> is available
+Warning in <TClass::Init>: no dictionary for class StPicoTrack is available
+Warning in <TClass::Init>: no dictionary for class StPicoEmcTrigger is available
+Warning in <TClass::Init>: no dictionary for class StPicoMtdTrigger is available
+Warning in <TClass::Init>: no dictionary for class StPicoBTowHit is available
+Warning in <TClass::Init>: no dictionary for class StPicoBTofHit is available
+Warning in <TClass::Init>: no dictionary for class StPicoMtdHit is available
+Warning in <TClass::Init>: no dictionary for class StPicoFmsHit is available
+Warning in <TClass::Init>: no dictionary for class StPicoBEmcPidTraits is available
+Warning in <TClass::Init>: no dictionary for class StPicoBTofPidTraits is available
+Warning in <TClass::Init>: no dictionary for class StPicoMtdPidTraits is available
